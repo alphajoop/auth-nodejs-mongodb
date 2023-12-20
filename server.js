@@ -22,7 +22,7 @@ mongoose
 
 app.use(
   cors({
-    origin: ['http://localhost:5173'],
+    origin: ['https://mern-authentication-delta.vercel.app'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
   }),
