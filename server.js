@@ -3,8 +3,12 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
 require('dotenv').config();
+const path = require('path');
 const cookieParser = require('cookie-parser');
 const authRoute = require('./Routes/authRouter');
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 const port = process.env.PORT || 3001;
 mongoose
@@ -22,7 +26,7 @@ mongoose
 
 app.use(
   cors({
-    origin: ['https://mern-authentication-delta.vercel.app'],
+    origin: process.env.ALLOWED_ORIGINS,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
   }),
@@ -31,5 +35,9 @@ app.use(
 app.use(cookieParser());
 
 app.use(express.json());
+
+app.get('/', async (req, res) => {
+  res.render('home');
+});
 
 app.use('/', authRoute);
