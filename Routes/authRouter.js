@@ -5,6 +5,6 @@ const { userVerification } = require('../Middlewares/authMiddleware');
 
 router.post('/auth/signup', Signup);
 router.post('/auth/login', Login);
-router.post('/', userVerification);
+router.post('/auth/verify', userVerification);
 
 module.exports = router;
